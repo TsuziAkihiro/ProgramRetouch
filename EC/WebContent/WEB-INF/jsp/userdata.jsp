@@ -9,8 +9,8 @@
 </head>
 <body>
 	<jsp:include page="/baselayout/header.jsp" />
-	<br>
-	<br>
+
+	<br><br>
 	<div class="container">
 		<div class="row center">
 			<h5 class=" col s12 light">ユーザー情報</h5>

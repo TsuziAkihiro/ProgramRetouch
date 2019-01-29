@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import base.DBManager;
@@ -150,6 +151,7 @@ public class BuyDAO {
                 }
             }
         }
+        Collections.reverse(buyList);
         return buyList;
     }
 }
