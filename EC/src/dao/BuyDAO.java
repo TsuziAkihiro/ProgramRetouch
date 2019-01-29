@@ -1,11 +1,14 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import base.DBManager;
 import beans.BuyDataBeans;
@@ -102,4 +105,51 @@ public class BuyDAO {
 		}
 	}
 
+    /**
+     * 全ての購入情報を取得する
+     * @return
+     */
+    public List<BuyDataBeans> findAll() {
+        Connection conn = null;
+        List<BuyDataBeans> buyList = new ArrayList<BuyDataBeans>();
+
+        try {
+            // データベースへ接続
+            conn = DBManager.getConnection();
+
+            // SELECT文を準備
+            String sql = "SELECT * FROM t_buy";
+
+             // SELECTを実行し、結果表を取得
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            // 結果表に格納されたレコードの内容を
+            // Userインスタンスに設定し、ArrayListインスタンスに追加
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int userId = rs.getInt("user_id");
+                int totalPrice = rs.getInt("total_price");
+                int delivertMethodId = rs.getInt("delivery_method_id");
+                Date buyDate = rs.getDate("create_date");
+                BuyDataBeans buy = new BuyDataBeans(id, userId, totalPrice, delivertMethodId, buyDate);
+
+                buyList.add(buy);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            // データベース切断
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            }
+        }
+        return buyList;
+    }
 }

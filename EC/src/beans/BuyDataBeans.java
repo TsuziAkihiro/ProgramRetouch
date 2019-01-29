@@ -20,7 +20,16 @@ public class BuyDataBeans  implements Serializable {
 	private String deliveryMethodName;
 	private int deliveryMethodPrice;
 
+	public BuyDataBeans() {
 
+	}
+	public BuyDataBeans(int id,int userId,int totalPrice,int delivertMethodId,Date buyDate) {
+		this.id = id;
+		this.userId = userId;
+		this.totalPrice = totalPrice;
+		this.delivertMethodId = delivertMethodId;
+		this.buyDate = buyDate;
+	}
 	public int getId() {
 		return id;
 	}
