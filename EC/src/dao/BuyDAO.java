@@ -1,7 +1,6 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -128,15 +127,25 @@ public class BuyDAO {
             // 結果表に格納されたレコードの内容を
             // Userインスタンスに設定し、ArrayListインスタンスに追加
             while (rs.next()) {
-                int id = rs.getInt("id");
-                int userId = rs.getInt("user_id");
-                int totalPrice = rs.getInt("total_price");
-                int delivertMethodId = rs.getInt("delivery_method_id");
-                Date buyDate = rs.getDate("create_date");
-                BuyDataBeans buy = new BuyDataBeans(id, userId, totalPrice, delivertMethodId, buyDate);
-
-                buyList.add(buy);
-            }
+            	BuyDataBeans buy = new BuyDataBeans();
+            	buy.setId(rs.getInt("id"));
+				buy.setTotalPrice(rs.getInt("total_price"));
+				buy.setBuyDate(rs.getTimestamp("create_date"));
+				buy.setDelivertMethodId(rs.getInt("delivery_method_id"));
+				buy.setUserId(rs.getInt("user_id"));
+				if(rs.getInt("user_id") == 1) {
+					buy.setDeliveryMethodName("特急配送");
+					buyList.add(buy);
+				}
+				if(rs.getInt("user_id") == 2) {
+					buy.setDeliveryMethodName("通常配送");
+					buyList.add(buy);
+				}
+				if(rs.getInt("user_id") == 3) {
+					buy.setDeliveryMethodName("日時指定配送");
+					buyList.add(buy);
+				}
+                }
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
