@@ -118,7 +118,7 @@ public class BuyDAO {
             conn = DBManager.getConnection();
 
             // SELECT文を準備
-            String sql = "SELECT * FROM t_buy";
+            String sql = "SELECT * FROM t_buy JOIN m_delivery_method ON t_buy.delivery_method_id = m_delivery_method.id";
 
              // SELECTを実行し、結果表を取得
             Statement stmt = conn.createStatement();
@@ -133,18 +133,8 @@ public class BuyDAO {
 				buy.setBuyDate(rs.getTimestamp("create_date"));
 				buy.setDelivertMethodId(rs.getInt("delivery_method_id"));
 				buy.setUserId(rs.getInt("user_id"));
-				if(rs.getInt("user_id") == 1) {
-					buy.setDeliveryMethodName("特急配送");
+				buy.setDeliveryMethodName(rs.getString("name"));
 					buyList.add(buy);
-				}
-				if(rs.getInt("user_id") == 2) {
-					buy.setDeliveryMethodName("通常配送");
-					buyList.add(buy);
-				}
-				if(rs.getInt("user_id") == 3) {
-					buy.setDeliveryMethodName("日時指定配送");
-					buyList.add(buy);
-				}
                 }
         } catch (SQLException e) {
             e.printStackTrace();
