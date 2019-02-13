@@ -32,16 +32,12 @@
 									<input type="text" name="login_id" value="${udb.loginId}"> <label>ログインID</label>
 								</div>
 							</div>
-							<div class="row">
-								<div class="input-field col s12">
-									<input type="text" name="user_address" value="${udb.address}"> <label>住所</label>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col s12">
-									<button class="btn  waves-effect waves-light  col s4 offset-s4" type="submit" name="action">更新</button>
-								</div>
-							</div>
+						    <div class="button-panel">
+						      <input type="submit" class="button" title="Sign In" value="修正"></input>
+						    </div>
+						    <div class="button-panel">
+						      <input type="submit" class="button regist_btn" title="Sign In" value="更新"></input>
+						    </div>
 						</form>
 					</div>
 				</div>

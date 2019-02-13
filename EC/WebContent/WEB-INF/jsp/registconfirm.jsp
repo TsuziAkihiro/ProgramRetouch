@@ -53,7 +53,6 @@
 								<div class="col s6 center-align">
 									<button class="btn  waves-effect waves-light" type="submit" name="confirm_button" value="regist">登録</button>
 								</div>
-
 							</div>
 						</form>
 					</div>
